@@ -1,0 +1,27 @@
+/** 1 **/
+CREATE TABLE accounts (
+	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	email VARCHAR UNIQUE,
+	name VARCHAR,
+	passhash VARCHAR
+);
+
+CREATE TABLE servers (
+	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	name VARCHAR UNIQUE,
+	host VARCHAR NOT NULL,
+	port INTEGER NOT NULL,
+	description VARCHAR
+);
+
+CREATE TABLE channels (
+	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	server_id INTEGER,
+	name VARCHAR NOT NULL,
+	description VARCHAR NULL,
+	icon_url VARCHAR,
+	banner VARCHAR,
+	FOREIGN KEY (server_id) REFERENCES servers(id),
+	UNIQUE (server_id, name)
+);
+
